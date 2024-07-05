@@ -18,20 +18,16 @@ ll min_element()
 
 bool dfs(int s, int from)
 {
-  bool ret =true;
   if(isvisited[s])
-    ret = false;
+    return false;
   isvisited[s]=true;
   for(int i=0;i<es[s].size();i++)
     {
-      if(es[s][i] != from)
-	{
-	  if(isvisited[es[s][i]]) return false;
-	  else return dfs(es[s][i],s);
-	  /*cout <<"start:" << s << "to: " << es[s][i] << endl;*/
-	}
+      if(es[s][i] == from)
+	continue;
+      if(!dfs(es[s][i],s)) return false;
     }
-  return ret;
+  return true;
 }
 
 void  solve()
